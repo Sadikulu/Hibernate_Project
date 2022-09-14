@@ -11,6 +11,7 @@ public class RunnerSave14 {
 
 	public static void main(String[] args) {
 
+		//Transient Statement
 		Student14 student1 = new Student14();
 		student1.setName("John Coffee");
 		student1.setMathGrade(10);
@@ -31,16 +32,25 @@ public class RunnerSave14 {
 
 		Transaction tx = session.beginTransaction();
 		
-		session.save(student1);
-		student1.setName("Update in persistent state");
+//		session.save(student1);
+		//student1 save edildikten sonra persistent statement'e geçiyor
+		
+//		student1.setName("Update in persistent state");
 		
 		//detached yapinca yukaridaki save metodunun yaptigi degişiklikte kalici olmuyor
-		session.evict(student1);
+//		session.evict(student1);
 		
 		//detached yapinca asagıdaki set ise yaramiyor. çünkü artik persistent context tarafindan 
 		//detach edilmis.
-		student1.setName("Update in detached");
-
+//		student1.setName("Update in detached");
+		
+//		session.merge(student1);//detached edilen bir nesne geri persistent state merge ile alınabilir
+//		session.update(student1);//detached edilen bir nesne geri persistent state update ile alınabilir
+		
+		//------delete metodu ile silineceğini söyliyoruz.daha sonra 
+		//commit ile db'den kalıcı olarak silinir
+//		Student14 studentFound=session.load(Student14.class, 1L);
+//		session.delete(studentFound);
 
 		tx.commit();
 		session.close();
